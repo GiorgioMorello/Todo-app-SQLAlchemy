@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<center>
+    <br>
+    <h2>To do List</h2>
+    <br>
+    <form method="POST" action="/add">
+        <div>
+            <label for="title">ToDo Title</label>
+            <input type="text" name="title" placeholder="Enter Todo...">
+            <button class="mt-2 estilo" type="submit">Add</button>
+
+        </div>
+    </form>
+</center>
+
+<hr>
+
+<div class="container">
+    <h3>Your To Do list</h3>
+    {% for todo in todo_list %}
+        <div class="row">
+            <div class="col border mt-3 p-3">
+                <p><h5>{{ todo.id }} | {{ todo.title }}</h5><small class="text-muted"><strong>created on: {{ datetime.strftime(todo.creation_date, "%d/%m/%Y") }}</strong></small></p>
+
+                {% if todo.complete == False %}
+                    <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Not Completed</button>
+                {% else %}
+                    <button type="button" class="btn btn-success btn-sm">Completed</button>
+                {% endif %}
+
+                <a href="/update/{{ todo.id }}"><button type="button" class="btn btn-primary">Update</button></a>
+                <a href="#"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">Delete</button></a>
+            </div>
+
+
+
+
+
+        </div>
+        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete ToDo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Do you want to delete the ToDo?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="{{ url_for('delete', todo_id=todo.id) }}"><button type="submit" class="btn btn-danger">Delete ToDo</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+
+
+
+
+{% endblock %}

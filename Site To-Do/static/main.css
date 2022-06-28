@@ -1,0 +1,22 @@
+body {
+
+}
+
+
+input[type=text] {
+  width: 30%;
+  border: 2px solid #D0D0D0;
+  border-radius: 6px;
+  background-image: url('icon.png');
+  background-repeat: no-repeat;
+  background-position: 5px 10px;
+  padding: 12px 20px 12px 34px;
+
+}
+
+.estilo {
+    background-color: #04AA6D;
+    border: 2px solid #D0D0D0;
+    border-radius: 6px;
+    color: white;
+}
